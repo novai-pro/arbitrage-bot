@@ -18,7 +18,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 logger = logging.getLogger(__name__)
 
-class FundingArbitrage:
+class FundingRateArbitrage:
     def __init__(self, private_key: str, wallet_address, base_url: str = "https://api.hyperliquid-testnet.xyz"):
         """
         Initialize the funding arbitrage class
@@ -122,9 +122,10 @@ async def main():
     # Initialize arbitrage bot
     private_key = os.getenv("PRIVATE_KEY")
     wallet_address = os.getenv("WALLET_ADDRESS")
+    base_url = os.getenv("BASE_URL")
     if private_key is None:
         raise Exception("Private key not set")
-    arb_bot = FundingArbitrage(private_key=private_key, wallet_address=wallet_address)
+    arb_bot = FundingRateArbitrage(private_key=private_key, wallet_address=wallet_address, base_url=base_url)
     
     # Run arbitrage logic
     await arb_bot.run_arbitrage()
